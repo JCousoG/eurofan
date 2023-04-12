@@ -1,14 +1,16 @@
-import ReactPlayer from 'react-player'
+import Cancion from './cancion'
 function ListaCancions ({cancions}) {
 return(
-    <ol>
-            {
+    <ol>    
+        
+        {
                 cancions.map(
-                    cancion=> <ReactPlayer key={cancion.id} url={cancion.url}  />
+                    cancion=> <Cancion key={cancion.id} cancions={cancion}  />
+                   
                 )
             }
             
-        </ol>
+    </ol>
     
 )
 }

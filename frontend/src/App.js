@@ -5,27 +5,29 @@ function App() {
   const cancions = [
     {id: 0,
     pais: "España",
-    url:"https://www.youtube.com/watch?v=3iZ43PJMy04"},
+    url:"3iZ43PJMy04"},
     {id: 1,
     pais: "Portugal",
-    url: "https://www.youtube.com/watch?v=lvpDLq88cyo"},
+    url: "lvpDLq88cyo"},
     {id: 2,
     pais: "Francia",
-    url: "https://www.youtube.com/watch?v=GWfbEFH9NvQ"},
+    url: "GWfbEFH9NvQ"},
     {id: 3,
     pais: "Alemania",
-    url: "https://www.youtube.com/watch?v=Y12_YMs9kCQ"},
+    url: "Y12_YMs9kCQ"},
     {id: 4,
     pais: "Italia",
-    url: "https://www.youtube.com/watch?v=N4HBDAbdXUg"},
+    url: "N4HBDAbdXUg"},
     {id: 5,
     pais: "Reino Unido",
-    url: "https://www.youtube.com/watch?v=tJ21grjN6wU"}
+    url: "tJ21grjN6wU"}
   ]
-
   
   return (
+    <>
+    <h1>Eurovisión 2023</h1>
     <ListaCancions cancions={cancions}/>
+    </>
   );
 }
 
