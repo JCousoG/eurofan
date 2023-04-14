@@ -1,4 +1,5 @@
 import './App.css';
+import { ContextProvider } from './componentes/contexto';
 import ListaCancions from './componentes/listaCancions';
 
 function App() {
@@ -20,13 +21,33 @@ function App() {
     url: "N4HBDAbdXUg"},
     {id: 5,
     pais: "Reino Unido",
-    url: "tJ21grjN6wU"}
+    url: "tJ21grjN6wU"},
+    {id: 6,
+    pais: "Irlanda",
+    url: "ak5Fevs424Y"},
+    {id: 7,
+    pais: "Bélgica",
+    url: "ORhEoS6d8e4"},
+    {id: 8,
+    pais: "Suecia",
+    url: "b3vJfR81xO0"},
+    {id: 9,
+    pais: "Noruega",
+    url: "CxNiUxdJnTQ"},
+    {id: 10,
+    pais: "Paises Bajos",
+    url: "UOf-oKDlO6A"},
+    {id: 11,
+    pais: "Rumanía",
+    url: "NRxv-AUCinQ"}
   ]
   
   return (
     <>
     <h1>Eurovisión 2023</h1>
-    <ListaCancions cancions={cancions}/>
+    <ContextProvider>
+      <ListaCancions cancions={cancions}/>
+    </ContextProvider>
     </>
   );
 }
