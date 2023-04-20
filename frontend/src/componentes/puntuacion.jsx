@@ -4,7 +4,7 @@ import { Context } from "./contexto"
 
 function Puntuacion ({form}) {
     const [ store, setStore ] = useContext(Context);
-    const votosQueTen = (store.votos[form])
+    const votosQueTen = store.votos[form]
     return (
         <>
        

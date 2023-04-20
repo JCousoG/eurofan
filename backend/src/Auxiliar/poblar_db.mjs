@@ -1,10 +1,6 @@
-import { ContextProvider } from '../componentes/contexto';
-import EnviarVotacion from '../componentes/enviarVotacion';
+import { Cancion } from "../main.mjs"
 
-import ListaCancions from '../componentes/listaCancions';
-
-function Votar  () {
-  const cancions = [
+const cancions = [
     {id: 0,
     pais: "España",
     url:"3iZ43PJMy04"},
@@ -115,17 +111,14 @@ function Votar  () {
     url: "Hjfq-T-8WHw"},
     {id: 36,
     pais: "Ucrania",
-    url: "neIscK1hNxs"}
-  ]  
-  return (
-        <>
-    <h1>Eurovisión 2023</h1>
-    <ContextProvider>
-      <ListaCancions cancions={cancions}/>
-      <EnviarVotacion/>
-    </ContextProvider>
+    url: "neIscK1hNxs"},
+  ]    
 
-    </>
-    )
-}
-export default Votar
+  cancions.forEach(
+    async item => {
+        item.puntos = 0
+        const cancion = await Cancion.findByPk(item.id)
+        if (cancion) cancion.update(item)
+        else Cancion.create(item)
+    }
+  )

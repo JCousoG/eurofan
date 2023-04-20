@@ -3,20 +3,24 @@ import { Context } from "./contexto"
 
 function Voto({id, puntuacion}) {
 
-    const [votoUsado, setVotoUsado ] = useState(false)
+  const [ store, setStore ] = useContext(Context);
 
-    const [ store, setStore ] = useContext(Context);
+    const [votoUsado, setVotoUsado ] = useState(false)
+    const [sonOVotoAsignado, setSonOVoto] = useState(store.votos[id] === puntuacion)
+
     useEffect(
         usarVoto,
         [store]
       )
       function usarVoto() {
-    setVotoUsado( ! store.puntos.includes(puntuacion))
+        setVotoUsado(
+          store.puntos.includes(puntuacion) ? false : true
+        )
       }
     function manexadorVoto() {
         console.log("Asignados puntos:", puntuacion);
         const newStore = {...store}
-        if (newStore.votos[id]) {newStore.puntos.push(newStore.votos[id])}
+        if (newStore.votos[id] > 0) {newStore.puntos.push(newStore.votos[id])}
         newStore.votos[id] = puntuacion
         const puntoIndex = newStore.puntos.indexOf(puntuacion)
         newStore.puntos.splice(puntoIndex,1)
@@ -25,7 +29,7 @@ function Voto({id, puntuacion}) {
 
     return(
         <>
-        <button onClick={manexadorVoto} disabled={votoUsado}>{puntuacion}</button>
+        <button className={sonOVotoAsignado ? "seleccionado" : ""} onClick={manexadorVoto} disabled={votoUsado}>{puntuacion}</button>
         </>
     )
 }

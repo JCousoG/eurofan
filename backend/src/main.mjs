@@ -34,6 +34,9 @@ const Cancion = sequelize.define('Cancion', {
   pais: {
     type: DataTypes.STRING
   },
+  url: {
+    type: DataTypes.STRING
+  },
   puntos: {
     type: DataTypes.INTEGER,
     defaultValue: 0
@@ -65,7 +68,23 @@ app.put("/cancions/", async (peticion, respuesta)=>{
         respuesta.send('Error.')
     }
 })
+app.get("/cancions/", async (_, respuesta)=>{
+        try {
+          const resultados = await Cancion.findAll({order: [["puntos", "DESC"]]})
+          respuesta.setHeader("Content-Type", "application/json")
+          respuesta.status(200)
+          respuesta.send(JSON.stringify(resultados))
+      } catch (error) {
+          respuesta.status(500)
+          respuesta.send('Error.')
+      }
+  }
+)
 app.listen( 8000,()=>{
     console.log("Express traballando...");
 })
 
+
+export {
+  Cancion
+}
