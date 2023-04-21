@@ -1,8 +1,9 @@
 import { Context } from "./contexto"
 import { useContext } from "react"
 function EnviarVotacion() {
-    const [store, setStore] = useContext(Context)
+    const [store] = useContext(Context)
     function enviarVotos() {
+      console.log(store);
       if (store.puntos.length === 0)
       {   
         fetch(
@@ -13,11 +14,13 @@ function EnviarVotacion() {
               body: JSON.stringify(store.votos)
             }
           )
-          window.location.reload()
+          store.setVista("resultados")
         }
   }
     return (
-        <button type="submit" onClick={enviarVotos}>Votar</button>
+      <>
+      <button  type="submit" onClick={enviarVotos}>Votar</button>
+      </>
     )
 }
 export default EnviarVotacion

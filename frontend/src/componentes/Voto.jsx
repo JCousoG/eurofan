@@ -1,15 +1,19 @@
 import { useContext, useState, useEffect } from "react"
 import { Context } from "./contexto"
 
+
 function Voto({id, puntuacion}) {
 
   const [ store, setStore ] = useContext(Context);
 
     const [votoUsado, setVotoUsado ] = useState(false)
-    const [sonOVotoAsignado, setSonOVoto] = useState(store.votos[id] === puntuacion)
+    const [sonOVotoAsignado, setSonOVoto] = useState(false)
 
     useEffect(
-        usarVoto,
+      ()=>{
+        usarVoto()
+        setSonOVoto(store.votos[id] === puntuacion)
+      },
         [store]
       )
       function usarVoto() {
@@ -25,10 +29,13 @@ function Voto({id, puntuacion}) {
         const puntoIndex = newStore.puntos.indexOf(puntuacion)
         newStore.puntos.splice(puntoIndex,1)
         setStore(newStore)
+        
+
     }
 
     return(
         <>
+        
         <button className={sonOVotoAsignado ? "seleccionado" : ""} onClick={manexadorVoto} disabled={votoUsado}>{puntuacion}</button>
         </>
     )

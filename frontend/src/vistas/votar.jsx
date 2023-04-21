@@ -1,7 +1,7 @@
-import { ContextProvider } from '../componentes/contexto';
 import EnviarVotacion from '../componentes/enviarVotacion';
 
 import ListaCancions from '../componentes/listaCancions';
+import Navegador from '../componentes/navegador';
 
 function Votar  () {
   const cancions = [
@@ -119,11 +119,9 @@ function Votar  () {
   ]  
   return (
         <>
-    <h1>Eurovisión 2023</h1>
-    <ContextProvider>
+    
       <ListaCancions cancions={cancions}/>
       <EnviarVotacion/>
-    </ContextProvider>
 
     </>
     )

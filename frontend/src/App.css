@@ -6,7 +6,19 @@ h1 {
   text-align: center;
   color: blue;
 }
+h2 {
+  font-size: x-large;
+}
+ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+}
 
 li {
   color: red;
+  font-size: smaller;
+}
+.seleccionado {
+  background-color: red;
 }

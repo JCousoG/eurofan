@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Context } from "./contexto"
 
 function Puntuacion ({form}) {
-    const [ store, setStore ] = useContext(Context);
+    const [ store ] = useContext(Context);
     const votosQueTen = store.votos[form]
     return (
         <>
@@ -19,7 +19,7 @@ function Puntuacion ({form}) {
         <Voto id={form} puntuacion={8}/>
         <Voto id={form} puntuacion={10}/>
         <Voto id={form} puntuacion={12}/>
-        <h2>Le han sido otorgados {votosQueTen} puntos</h2>
+        <h3>Le has dado {votosQueTen} puntos</h3>
         </>
     )
 }

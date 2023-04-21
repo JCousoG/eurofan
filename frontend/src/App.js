@@ -1,14 +1,17 @@
 import './App.css';
-import MostrarResultados from './vistas/resultados';
 import Votar from './vistas/votar.jsx'
+import { ContextProvider } from './componentes/contexto';
+import Navegador from './componentes/navegador';
 
 function App() {
   
   
   return (
     <>
-    <Votar/>
-    <MostrarResultados/>
+    <h1>Eurovisión 2023</h1>
+    <ContextProvider>
+      <Navegador/>
+    </ContextProvider>
     </>
   );
 }

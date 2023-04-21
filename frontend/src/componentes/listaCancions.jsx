@@ -1,7 +1,8 @@
 import Cancion from './cancion'
 function ListaCancions ({cancions}) {
 return(
-    <ol>    
+<>
+    <ul>    
         
         {
                 cancions.map(
@@ -10,7 +11,10 @@ return(
                 )
             }
             
-    </ol>
+    </ul>
+          </>
+
+    
     
 )
 }

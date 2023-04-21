@@ -5,6 +5,8 @@ export const Context = createContext();
 export function ContextProvider ( {children} ) {
 
     const store = useState({
+        vista: "Votar",
+        setVista: setVista,
         puntos: [1,2,3,4,5,6,7,8,10,12],
         votos: {
             0: 0,
@@ -46,6 +48,14 @@ export function ContextProvider ( {children} ) {
             36: 0
         }
     });
+
+    
+    function setVista(vista){
+        const [oldStore, setStore] = store
+        const newStore = {...oldStore}
+        newStore.vista=vista
+        setStore(newStore)
+    }
 
     return (
         <Context.Provider value={store}>
