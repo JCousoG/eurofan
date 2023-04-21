@@ -28,7 +28,9 @@ function MostrarResultados () {
         setResultados(novosDatos)
       }
       return(
+        <><h2>Clasificación</h2>
       <MostrarResultado resultados={resultados}/>
+      </>
       
       )
     }
