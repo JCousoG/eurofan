@@ -1,7 +1,6 @@
 import EnviarVotacion from '../componentes/enviarVotacion';
 
 import ListaCancions from '../componentes/listaCancions';
-import Navegador from '../componentes/navegador';
 
 function Votar  () {
   const cancions = [
