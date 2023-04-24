@@ -42,7 +42,20 @@ const Cancion = sequelize.define('Cancion', {
     defaultValue: 0
   }
 });
-
+const Usuario = sequelize.define('Cancion', {
+  usuario: {
+    type: DataTypes.STRING
+  },
+  fechaUltimoVoto: {
+    type: DataTypes.DATEONLY
+  },
+  email: {
+    type: DataTypes.STRING,
+    },
+  hashContrasinal: {
+    type: DataTypes.STRING
+  }
+});
 /**
  * Pedimos a sequelize que adapte las tablas en la base
  * de datos a los modelos definidos.
