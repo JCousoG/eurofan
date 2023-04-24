@@ -19,7 +19,7 @@ function EnviarVotacion() {
   }
     return (
       <>
-      <button  type="submit" onClick={enviarVotos}>Votar</button>
+      <button className="btn-flotante" type="submit" onClick={enviarVotos}>Votar</button>
       </>
     )
 }
