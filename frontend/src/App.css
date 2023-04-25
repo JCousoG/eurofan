@@ -38,6 +38,9 @@ li {
 button[disabled] {
   background-image: none;
 }
+label {
+  color: white
+}
 button[disabled].seleccionado {
   background-color: red;
 }

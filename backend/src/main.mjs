@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { Sequelize, DataTypes, where }  from 'sequelize';
+import bcrypt from "bcrypt"
 
 const app = express()
 app.use(cors())
@@ -42,8 +43,8 @@ const Cancion = sequelize.define('Cancion', {
     defaultValue: 0
   }
 });
-const Usuario = sequelize.define('Cancion', {
-  usuario: {
+const Usuario = sequelize.define('Usuario', {
+  nome: {
     type: DataTypes.STRING
   },
   fechaUltimoVoto: {
@@ -65,6 +66,22 @@ await sequelize.sync({ alter: true })
 /**
  * FIN CONFIGURACION TABLAS BASE DE DATOS
  */
+app.post("/usuarios/", async (peticion, respuesta) => {
+  try {
+    const hash = bcrypt.hashSync(peticion.body.hashContrasinal, 10)
+    const novosDatos = {...peticion.body, hashContrasinal: hash}
+    const modeloUsuario = await Usuario.create(novosDatos)
+    
+
+    respuesta.setHeader("Content-Type", "application/json")
+    respuesta.status(200).json(modeloUsuario)
+  }
+  catch (error) {
+    console.error(error)
+    respuesta.status(500)
+    respuesta.send('Error.')
+  }
+})
 
 app.put("/cancions/", async (peticion, respuesta)=>{
     try {
