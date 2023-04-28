@@ -1,8 +1,22 @@
+import { useContext } from 'react';
+import { Context } from '../componentes/contexto';
+
 import EnviarVotacion from '../componentes/enviarVotacion';
 
 import ListaCancions from '../componentes/listaCancions';
 
 function Votar  () {
+  const [store] = useContext(Context)
+  function manexadorBoton () {
+    
+    window.location.reload()
+  }
+  function logOut () {
+    localStorage.removeItem("token")
+    store.setVista("Login")
+
+    
+  }
   const cancions = [
     {id: 0,
     pais: "España",
@@ -118,7 +132,8 @@ function Votar  () {
   ]  
   return (
         <>
-    
+      <button onClick={logOut}>Cerrar sesión</button>
+      <button onClick={manexadorBoton}>Recarga a páxina</button>
       <ListaCancions cancions={cancions}/>
       <EnviarVotacion/>
 

@@ -1,4 +1,4 @@
-import express from "express"
+import express, { response } from "express"
 import cors from "cors"
 import { Sequelize, DataTypes, where }  from 'sequelize';
 import bcrypt from "bcrypt"
@@ -45,7 +45,8 @@ const Cancion = sequelize.define('Cancion', {
 });
 const Usuario = sequelize.define('Usuario', {
   nome: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    unique: true
   },
   fechaUltimoVoto: {
     type: DataTypes.DATEONLY
@@ -61,7 +62,8 @@ const Usuario = sequelize.define('Usuario', {
  * Pedimos a sequelize que adapte las tablas en la base
  * de datos a los modelos definidos.
  */
-await sequelize.sync({ alter: true })
+//await sequelize.sync({ alter: true })
+await sequelize.sync()
 
 /**
  * FIN CONFIGURACION TABLAS BASE DE DATOS
@@ -82,9 +84,40 @@ app.post("/usuarios/", async (peticion, respuesta) => {
     respuesta.send('Error.')
   }
 })
+app.post("/login/", async (peticion, respuesta) => {
+  try {
+    const usuario = await Usuario.findOne({
+      where: {nome: peticion.body.nome}
+    })
 
-app.put("/cancions/", async (peticion, respuesta)=>{
+    const fechaUltimoVoto = new Date(usuario.fechaUltimoVoto)
+    const tempoTranscurrido = Date.now() - fechaUltimoVoto
+    const transcurriuUnDia = tempoTranscurrido > 86400000
+    const autenticado = bcrypt.compareSync(peticion.body.contrasinal, usuario?.hashContrasinal ?? "" )
+    const volverVotar = fechaUltimoVoto.setDate(fechaUltimoVoto.getDate()+1)
+    if (autenticado ) {
+      respuesta.status( transcurriuUnDia ? 200 : 400 )
+      return respuesta.json( transcurriuUnDia ? {id: usuario.id, autenticado : true} : volverVotar )
+    }
+    return respuesta.sendStatus(401)
+    
+   
+  } catch (error) {
+    console.error(error)
+    respuesta.status(500)
+    respuesta.send('Error.')
+}
+})
+
+app.put("/cancions/", middlewareAutorizacion, async (peticion, respuesta)=>{
     try {
+      console.log(respuesta.locals)
+      const usuario = await Usuario.findOne({
+        where: {
+          id: respuesta.locals.idUsuario
+        }
+      })
+      usuario.update({fechaUltimoVoto: Date.now()})
       for (let cancionId in peticion.body) {
         const [modeloCancion] = await Cancion.findOrCreate({where: {id: cancionId}})
         modeloCancion.puntos += peticion.body[cancionId] 
@@ -110,6 +143,21 @@ app.get("/cancions/", async (_, respuesta)=>{
       }
   }
 )
+
+/**
+ * MIDDLEWARES
+ */
+
+function middlewareAutorizacion(peticion, respuesta, next) {
+  const token = JSON.parse(peticion.headers.authorization)
+  if (token.autenticado) {
+    respuesta.locals.idUsuario = token.id
+    return next()
+  } else {
+    return respuesta.sendStatus(403)
+  }
+}
+
 app.listen( 8000,()=>{
     console.log("Express traballando...");
 })

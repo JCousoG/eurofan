@@ -3,6 +3,10 @@ import MostrarResultado from "../componentes/mostrarResultado";
 
 function MostrarResultados () {
     const [resultados, setResultados] = useState([])
+    function manexadorBoton () {
+    
+      window.location.reload()
+    }
 
     useEffect(
         obterResultados,
@@ -27,8 +31,11 @@ function MostrarResultados () {
       function reaccionParaResultados(novosDatos){
         setResultados(novosDatos)
       }
+
       return(
-        <><h2>Clasificación</h2>
+        <>
+         <button onClick={manexadorBoton}>Recarga a páxina</button>
+        <h2>Clasificación</h2>
       <MostrarResultado resultados={resultados}/>
       </>
       

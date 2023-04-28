@@ -5,7 +5,7 @@ export const Context = createContext();
 export function ContextProvider ( {children} ) {
 
     const store = useState({
-        vista: "Votar",
+        vista: "Login",
         setVista: setVista,
         puntos: [1,2,3,4,5,6,7,8,10,12],
         votos: {

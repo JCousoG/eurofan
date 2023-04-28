@@ -10,7 +10,10 @@ function EnviarVotacion() {
             "http://localhost:8000/cancions/",
             {
               method: "PUT",
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                authorization: localStorage.getItem("token")
+              },
               body: JSON.stringify(store.votos)
             }
           )

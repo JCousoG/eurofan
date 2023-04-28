@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/main.mjs"
+    "start": "node src/main.mjs",
+    "poblar": "node src/Auxiliar/poblar_db.mjs"
   },
   "keywords": [],
   "author": "",

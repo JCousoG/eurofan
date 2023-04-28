@@ -1,8 +1,14 @@
-import { useState } from "react"
+import micro from "../micro.jpg" 
+import { useState, useContext } from "react"
+import { Context } from "./contexto"
 function FormularioRexistro () {
+    const [store] = useContext(Context) 
     const [nome, setNome] = useState("")
     const [hashContrasinal, setHashContrasinal] = useState("")
     const [email, setCorreo]= useState("")
+    function inicioSesion () {
+        store.setVista("Login")
+    }
 
     async function enviarNovoUsuario() {
         const usuario = { nome, hashContrasinal, email }
@@ -18,16 +24,20 @@ function FormularioRexistro () {
                     body: usuarioJSON
                 }
             )
+            if (resposta.ok) {
+            store.setVista("Login")}
+            else { (alert("Ese nome xa está ocupado, proba a poñer outro nome"))}
             console.log(resposta);
         } catch (excepcion) {
             console.error(excepcion)
-            alert(excepcion)
+           
+           
         }
     }
 
 
     return(
-       <>
+       <><h2>Rexistrate para poder votar</h2>
             <label>
                 Nome:
                 <input type="text" value={nome} onInput={(evento)=>{setNome(evento.target.value)}}/>
@@ -41,6 +51,8 @@ function FormularioRexistro () {
                 <input type="email" value={email} onInput={(evento)=>{setCorreo(evento.target.value)}}/>
             </label>
             <button onClick={enviarNovoUsuario}>Enviar</button>
+            <button onClick={inicioSesion}>Iniciar Sesión</button>
+            <img src={micro} />
             </>
            
         
