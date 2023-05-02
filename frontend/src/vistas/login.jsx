@@ -68,7 +68,7 @@ function Login () {
         <input type="password"  onKeyDown={pulsarEnter} value={contrasinal} onInput={(evento)=>{setContrasinal(evento.target.value)}}/>
         </label>
         <button onClick={iniciarSesion}>Login</button>
-        <button onClick={rexistrarse}>Rexístrate</button>
+        <button onClick={rexistrarse}>Regístrate</button>
         <img src={micro} />
 
 

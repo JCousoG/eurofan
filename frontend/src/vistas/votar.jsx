@@ -133,7 +133,7 @@ function Votar  () {
   return (
         <>
       <button onClick={logOut}>Cerrar sesión</button>
-      <button onClick={manexadorBoton}>Recarga a páxina</button>
+      <button onClick={manexadorBoton}>Recarga la página</button>
       <ListaCancions cancions={cancions}/>
       <EnviarVotacion/>
 
