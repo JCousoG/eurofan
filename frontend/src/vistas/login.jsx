@@ -10,7 +10,13 @@ function Login () {
     function rexistrarse () {
         store.setVista("rexistro")
     }
+    function pulsarEnter (evento) {
+    if (evento.key === 'Enter') {
+      iniciarSesion();
+    }
+}
     function iniciarSesion () {
+         
         const datos = {nome, contrasinal}
         const datosJSON = JSON.stringify(datos)
         fetch( 
@@ -55,11 +61,11 @@ function Login () {
         <>
         <label>
             Nome:
-        <input type="text" value={nome} onInput={(evento)=>{setNome(evento.target.value)}}/>
+        <input type="text"   onKeyDown={pulsarEnter} value={nome} onInput={(evento)=>{setNome(evento.target.value)}}/>
         </label>
         <label>
             Contrasinal:
-        <input type="password" value={contrasinal} onInput={(evento)=>{setContrasinal(evento.target.value)}}/>
+        <input type="password"  onKeyDown={pulsarEnter} value={contrasinal} onInput={(evento)=>{setContrasinal(evento.target.value)}}/>
         </label>
         <button onClick={iniciarSesion}>Login</button>
         <button onClick={rexistrarse}>Rexístrate</button>
